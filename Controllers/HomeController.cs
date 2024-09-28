@@ -15,6 +15,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        var _ = BadPerformanceRandomNumber();
+        var test = "hej";
         return View();
     }
 
@@ -27,5 +29,25 @@ public class HomeController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    public int BadPerformanceRandomNumber()
+    {
+        int randomNumber = 0;
+
+        // Simulate bad performance by performing unnecessary computations
+        for (int i = 0; i < 1000000; i++)
+        {
+            // Perform a computationally intensive but pointless calculation
+            randomNumber += (int)Math.Sqrt(i) * (int)Math.Pow(i, 0.5) % 1000;
+        }
+
+        // Use current time ticks to seed the random number generator
+        Random rnd = new Random(DateTime.Now.Ticks.GetHashCode());
+
+        // Generate the random number
+        randomNumber += rnd.Next();
+
+        return randomNumber;
     }
 }
