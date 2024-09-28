@@ -16,6 +16,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         var _ = BadPerformanceRandomNumber();
+        var test = "hej";
         return View();
     }
 
